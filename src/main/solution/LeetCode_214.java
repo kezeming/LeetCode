@@ -21,10 +21,10 @@ public class LeetCode_214 {
     public String shortestPalindrome(String s) {
         StringBuffer p = new StringBuffer(s);
         int best = kmp(p.reverse().toString(), s);
-        if(best != s.length()) {
-            best = kmp(p.substring(p.length()-best, p.length()), s.substring(0, best));
+        if (best != s.length()) {
+            best = kmp(p.substring(p.length() - best, p.length()), s.substring(0, best));
         }
-        String add = (best == s.length()-1 ? "" : s.substring(best+1));
+        String add = (best == s.length() - 1 ? "" : s.substring(best + 1));
         StringBuffer ans = new StringBuffer(add).reverse().append(s);
         return ans.toString();
     }
@@ -38,23 +38,23 @@ public class LeetCode_214 {
         char[] ss = s.toCharArray();
         char[] pp = p.toCharArray();
 
-        int[] next = new int[m+1];
+        int[] next = new int[m + 1];
 
-        for(int i=2,j=0;i<=m;i++) {
-            while (j>0 && pp[i] != pp[j+1]) {
+        for (int i = 2, j = 0; i <= m; i++) {
+            while (j > 0 && pp[i] != pp[j + 1]) {
                 j = next[j];
             }
-            if(pp[i] == pp[j+1]) {
+            if (pp[i] == pp[j + 1]) {
                 j++;
             }
             next[i] = j;
         }
         int maxLen = 0;
-        for(int i=2,j=0;i<=n;i++) {
-            while (j>0 && ss[i] != pp[j+1]) {
+        for (int i = 2, j = 0; i <= n; i++) {
+            while (j > 0 && ss[i] != pp[j + 1]) {
                 j = next[j];
             }
-            if(ss[i] == pp[j+1]) {
+            if (ss[i] == pp[j + 1]) {
                 j++;
             }
             maxLen = Math.max(maxLen, j);
